@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FitFlow.Models.Entities.Membership>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Membership</h1>
+
+<p>
+    <a asp-action="Create">Create Membership</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>  
+                    @Html.DisplayFor(modelItem => item.Person.FirstName)  
+                    @Html.DisplayFor(modelItem => item.Person.LastName)                 
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MembershipID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MembershipID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MembershipID">Delete</a>
+                </td>
+            </tr>
+}
+    </tbody>
+</table>
