@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Membership</h1>
+<h1>Membership List</h1>
 
 <p>
-    <a asp-action="Create">Create Membership</a>
+    <a asp-action="Create" class="btn btn-primary bi bi-plus-circle"> Create Membership</a>
 </p>
 <table class="table">
     <thead>
@@ -27,7 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Fee)
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -49,9 +51,9 @@
                     @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.MembershipID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MembershipID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MembershipID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.MembershipID" class="btn btn-primary btn-sm bi bi-file-earmark-text"> Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MembershipID" class="btn btn-secondary btn-sm bi bi-card-text"> Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MembershipID" class="btn btn-danger btn-sm bi bi-trash"> Delete</a>
                 </td>
             </tr>
 }

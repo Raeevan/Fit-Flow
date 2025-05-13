@@ -73,6 +73,12 @@ namespace FitFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MembershipID,PersonID,MembershipType,StartDate,EndDate,Fee")] Membership membership)
         {
+            if (!string.IsNullOrEmpty(membership.MembershipType))
+            {
+                membership.MembershipType = membership.MembershipType.ToUpper();
+            }
+
+            // Check if the membership type is valid
             if (ModelState.IsValid)
             {
                 // Check if a membership already exists for the selected person  
@@ -88,6 +94,7 @@ namespace FitFlow.Controllers
                        .OrderBy(p => p.LastName)
                        .ThenBy(p => p.FirstName)
                        .ToList();
+                    
                     ViewBag.PersonID = new SelectList(personsList, "PersonID", "FullName", membership.PersonID);
                     return View(membership);
                 }

@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary bi bi-plus-circle">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.InstructorID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClassID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClassID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClassID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.ClassID" class="btn btn-primary bi bi-file-earmark-text btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ClassID" class="btn btn-secondary btn-sm bi bi-card-text">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ClassID" class="btn btn-danger btn-sm bi bi-trash">Delete</a>
             </td>
         </tr>
 }

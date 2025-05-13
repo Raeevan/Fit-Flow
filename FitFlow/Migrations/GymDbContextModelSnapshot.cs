@@ -41,7 +41,7 @@ namespace FitFlow.Migrations
 
                     b.HasKey("AttendanceID");
 
-                    b.ToTable("Attendances", (string)null);
+                    b.ToTable("Attendances");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Class", b =>
@@ -71,7 +71,7 @@ namespace FitFlow.Migrations
 
                     b.HasKey("ClassID");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Membership", b =>
@@ -103,7 +103,7 @@ namespace FitFlow.Migrations
 
                     b.HasIndex("PersonID");
 
-                    b.ToTable("Memberships", (string)null);
+                    b.ToTable("Memberships");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Person", b =>
@@ -133,6 +133,11 @@ namespace FitFlow.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -145,7 +150,7 @@ namespace FitFlow.Migrations
 
                     b.HasKey("PersonID");
 
-                    b.ToTable("Persons", (string)null);
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Role", b =>
@@ -156,13 +161,43 @@ namespace FitFlow.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleID");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("FitFlow.Models.Entities.UserRole", b =>
+                {
+                    b.Property<int>("UserRoleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleID"));
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserRoleID");
+
+                    b.HasIndex("PersonID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Membership", b =>
@@ -174,6 +209,30 @@ namespace FitFlow.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("FitFlow.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("FitFlow.Models.Entities.Person", "Person")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitFlow.Models.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("FitFlow.Models.Entities.Person", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

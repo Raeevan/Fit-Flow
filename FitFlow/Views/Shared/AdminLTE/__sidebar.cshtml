@@ -1,0 +1,70 @@
+﻿@{
+    var userEmail = "Loading...";
+    var avatarUrl = "/dominjun.png";
+    var appName = "/2track.png";
+}
+
+<aside class="main-sidebar sidebar-dark-secondary elevation-4">
+    <!-- Brand Logo -->
+    <a asp-area="" asp-page="/Dashboards/DefaultDashboard" class="brand-link d-flex justify-content-center align-items-center">
+        <img src="@Url.Content(appName)" alt="Company logo" style="width: 150px; height: 75px;">
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel d-flex mb-3 mt-3 pb-3">
+            <div class="image">
+                <img id="AvatarImageSide" src="@avatarUrl" class="img-circle elevation-2" alt="User Image" style="width: 40px; height: 40px;">
+            </div>
+            <div class="info">
+                <a asp-area="" asp-page="/Profiles/MyProfile" class="d-block" id="userEmail">@userEmail</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <div id="navbarnav" class="navbar-nav w-100">
+                <div id="mainMenuContainer">
+                    <div id="mainMenu"></div>
+                </div>
+            </div>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+<script>
+        document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            const views = [
+                { id: 1, name: "Attendances", navURL: "/Attendances", pid: null },
+                { id: 2, name: "Classes", navURL: "/Classes", pid: null },
+                { id: 3, name: "Membership", navURL: "/Memberships", pid: null },
+                { id: 4, name: "Member", navURL: "/People", pid: null },
+                { id: 5, name: "Roles", navURL: "/Roles", pid: null }
+            ];
+
+            const mainMenu = new ej.navigations.TreeView({
+                fullRowNavigable: true,
+                fields: {
+                    dataSource: views,
+                    id: 'id',
+                    text: 'name',
+                    navigateUrl: 'navURL',
+                    parentID: 'pid',
+                    hasChildren: 'hasChild'
+                },
+                enablePersistence: false
+            });
+            mainMenu.appendTo('#mainMenu');
+        } catch (error) {
+            console.error('Error initializing sidebar menu:', error);
+        }
+    });
+</script>
+
+
+@* @section scripts {
+    <script src="~/Views/Shared/AdminLTE/__sidebar.cshtml.js"></script>
+} *@

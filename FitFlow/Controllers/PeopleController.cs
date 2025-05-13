@@ -56,6 +56,9 @@ namespace FitFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PersonID,FirstName,LastName,BirthDate,Gender,Email,PhoneNumber,joinDate,Status")] Person person)
         {
+           person.FirstName.ToUpper();
+           person.LastName.ToUpper();
+
             if (ModelState.IsValid)
             {
                 _context.Add(person);
