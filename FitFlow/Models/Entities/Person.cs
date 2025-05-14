@@ -11,7 +11,7 @@ namespace FitFlow.Models.Entities
 
  
         [StringLength(255)]
-        public string PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }
 
 
         [Display(Name = "First Name")]
@@ -25,14 +25,16 @@ namespace FitFlow.Models.Entities
         public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
+
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-        public DateTime joinDate { get; set; }
+        public DateTime joinDate { get; set; } = DateTime.Now.Date;
 
         public bool Status { get; set; }
 
         // Navigation properties
-        public virtual ICollection<UserRole> UserRoles { get; set; }
-        
+        //public virtual ICollection<UserRole> UserRoles { get; set; }
+
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
     }

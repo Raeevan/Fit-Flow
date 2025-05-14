@@ -10,7 +10,6 @@ namespace FitFlow.Models.Entities
 
         [Required]
         [ForeignKey("Person")]
-
         public int PersonID { get; set; }
         public Person? Person { get; set; }
 
@@ -20,7 +19,7 @@ namespace FitFlow.Models.Entities
         public Role? Role { get; set; }
 
         [Required]
-        public DateTime AssignedAt { get; set; } = DateTime.Now;
+        public DateTime AssignedAt { get; set; } = DateTime.Now.Date;
 
        
 

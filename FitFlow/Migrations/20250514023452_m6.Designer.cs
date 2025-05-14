@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitFlow.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20250506173226_m5")]
-    partial class m5
+    [Migration("20250514023452_m6")]
+    partial class m6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,6 +136,10 @@ namespace FitFlow.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PasswordHash")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,6 +163,9 @@ namespace FitFlow.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -166,6 +173,32 @@ namespace FitFlow.Migrations
                     b.HasKey("RoleID");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("FitFlow.Models.Entities.UserRole", b =>
+                {
+                    b.Property<int>("UserRoleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleID"));
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserRoleID");
+
+                    b.HasIndex("PersonID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("FitFlow.Models.Entities.Membership", b =>
@@ -177,6 +210,25 @@ namespace FitFlow.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("FitFlow.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("FitFlow.Models.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitFlow.Models.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

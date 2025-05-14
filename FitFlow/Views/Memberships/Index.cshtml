@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.MembershipType)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    @item.StartDate.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
@@ -51,8 +51,8 @@
                     @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.MembershipID" class="btn btn-primary btn-sm bi bi-file-earmark-text"> Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MembershipID" class="btn btn-secondary btn-sm bi bi-card-text"> Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.MembershipID" class="btn btn-warning btn-sm bi bi-pencil"> Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MembershipID" class="btn btn-success btn-sm bi bi-file-earmark-text"> Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.MembershipID" class="btn btn-danger btn-sm bi bi-trash"> Delete</a>
                 </td>
             </tr>

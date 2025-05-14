@@ -16,7 +16,6 @@ namespace FitFlow.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
-
         public DbSet<UserRole> UserRoles { get; set; }
 
     }

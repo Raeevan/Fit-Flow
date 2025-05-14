@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>User Role</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,14 +21,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.AssignedAt)
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Person.LastName)
+                @Html.DisplayFor(modelItem => item.Person.LastName), 
                 @Html.DisplayFor(modelItem => item.Person.FirstName)
             </td>
             <td>
@@ -38,9 +40,9 @@
                 @Html.DisplayFor(modelItem => item.AssignedAt)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserRoleID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserRoleID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserRoleID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.UserRoleID" class="btn btn-warning btn-sm bi bi bi-pencil">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserRoleID" class="btn btn-success btn-sm bi bi-file-earmark-text">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserRoleID" class="btn btn-danger btn-sm bi bi-trash">Delete</a>
             </td>
         </tr>
 }

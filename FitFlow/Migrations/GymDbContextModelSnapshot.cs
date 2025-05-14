@@ -134,7 +134,6 @@ namespace FitFlow.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -162,7 +161,6 @@ namespace FitFlow.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleName")
@@ -214,7 +212,7 @@ namespace FitFlow.Migrations
             modelBuilder.Entity("FitFlow.Models.Entities.UserRole", b =>
                 {
                     b.HasOne("FitFlow.Models.Entities.Person", "Person")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("PersonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -228,11 +226,6 @@ namespace FitFlow.Migrations
                     b.Navigation("Person");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("FitFlow.Models.Entities.Person", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

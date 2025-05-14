@@ -15,7 +15,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.RoleName)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -25,9 +30,12 @@
                 @Html.DisplayFor(modelItem => item.RoleName)
             </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.RoleID" class="btn btn-primary btn-sm bi bi-file-earmark-text"> Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.RoleID" class="btn btn-secondary btn-sm bi bi-card-text"> Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.RoleID" class="btn btn-danger btn-sm bi bi-trash"> Delete</a>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RoleID" class="btn btn-warning btn-sm bi bi bi-pencil">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RoleID" class="btn btn-success btn-sm bi bi-file-earmark-text">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RoleID" class="btn btn-danger btn-sm bi bi-trash">Delete</a>
                 </td>
         </tr>
 }

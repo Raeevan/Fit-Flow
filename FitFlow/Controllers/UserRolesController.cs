@@ -53,7 +53,7 @@ namespace FitFlow.Controllers
         public IActionResult Create()
         {
             ViewData["PersonID"] = new SelectList(_context.Persons, "PersonID", "LastName");
-            ViewData["RoleID"] = new SelectList(_context.Roles, "RoleID", "RoleID");
+            ViewData["RoleID"] = new SelectList(_context.Roles, "RoleID", "RoleName");
             return View();
         }
 

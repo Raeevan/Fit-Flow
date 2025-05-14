@@ -18,12 +18,12 @@ namespace FitFlow.Models.Entities
         [Required(ErrorMessage = "Start date is required")]
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now.Date;
 
         [Required(ErrorMessage = "End date is required")]
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } = DateTime.Now.Date.AddMonths(1);
 
         [Required(ErrorMessage = "Fee amount is required")]
         [Display(Name = "Fee")]

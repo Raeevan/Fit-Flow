@@ -54,7 +54,7 @@ namespace FitFlow.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoleID,RoleName")] Role role)
+        public async Task<IActionResult> Create([Bind("RoleID,RoleName,Description")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FitFlow.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoleID,RoleName")] Role role)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleID,RoleName,Description")] Role role)
         {
             if (id != role.RoleID)
             {
